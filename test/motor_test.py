@@ -1,4 +1,3 @@
-# Import required libraries
 import sys
 import time
 import RPi.GPIO as GPIO

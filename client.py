@@ -1,43 +1,45 @@
 import socket
+import RPi.GPIO as GPIO
+import time
+import signal
+import sys
+import mpu6050
 
-
-target_host = "192.168.100.123"                       
-target_port = 1890
+host = "192.168.100.119"                       
+port = 1890
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)      #ソケット作成
-client.connect((target_host, target_port))                      #サーバのIPとポートで接続 
+client.connect((host, port))                      #サーバのIPとポートで接続 
 
-print ("Connect Success!! %s : %s" % (target_host, target_port))
+print ("Connected %s : %s" % (host, port))
 
 
+def handler(signum, frame):
+    print ('Signal handler called with signal', signum)
+    GPIO.cleanup()
+    sys.exit(0)
 
-def input_encode():                                             #エンコード
-    data = input("[Client] > ")
+signal.signal(signal.SIGINT, handler)
 
-    if data == "exit":                                          #終了条件
-        client.send(b'exit')
-        print ("////Finish Connect////")
-        client.shutdown(1)
-        client.close()
-        exit()
 
-    data = data.encode('utf-8')
-    return data
-
-def decode(response):                                           #デコード
+def decode(response):
     response = response.decode()
 
-    if response == "exit":                                      #終了条件
-        print ("////Finish Connect////")
+    if response == "exit":
+        print ("Disconnected")
         client.close()
         exit()
 
     return response
 
+
 while True:
-    client.send(input_encode())         
+    if mpu6050.get_motion() == True:
+        print("start walking")
 
-    response = client.recv(4096)                                #データ受け取り
+        if sendFlag == False:
+            msg = 'on'
+            client.send(msg.encode('utf-8'))
+            sendFlag = True
 
-    response = decode(response)                                 #受け取りデータをデコード
-    print ("[Server] > %s " % (response))                
+    time.sleep(0.1)

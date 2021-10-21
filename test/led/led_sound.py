@@ -5,24 +5,17 @@ import RPi.GPIO as GPIO
 import pygame.mixer
 import threading
 
-# Use BCM GPIO references
-# instead of physical pin numbers
-#GPIO.setmode(GPIO.BCM)
 mode = GPIO.getmode()
 GPIO.cleanup()
 
-# Define GPIO signals to use
-# Physical pins 11,15,16,18
-# GPIO17,GPIO22,GPIO23,GPIO24
-
 bPin1 = 17
 bPin2 = 27
-
 
 GPIO.setmode(GPIO.BCM)
 
 GPIO.setup(bPin1, GPIO.OUT)
 GPIO.setup(bPin2, GPIO.OUT)
+
 
 def reverse():
 	time.sleep(2)
@@ -48,5 +41,3 @@ def main():
 
 	thread_1.start()
 	thread_2.start()
-	# print "start sound"
-	# print "Stopping motor"
