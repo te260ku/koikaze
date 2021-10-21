@@ -59,6 +59,6 @@ while True:
                 msg = 'off'
                 client.send(msg.encode('utf-8'))
         else:
-                return
+            break
     time.sleep(0.1)
     before = now
