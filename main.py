@@ -39,7 +39,7 @@ def motor():
 
 def sound():
     pygame.mixer.init()
-    pygame.mixer.music.load("walk.mp3")
+    pygame.mixer.music.load("./assets/walk.mp3")
     pygame.mixer.music.play(1)
     time.sleep(15)
     pygame.mixer.music.stop()

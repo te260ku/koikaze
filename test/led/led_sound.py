@@ -29,7 +29,7 @@ def reverse():
 
 def sound():
 	pygame.mixer.init()
-	pygame.mixer.music.load("walk.mp3")
+	pygame.mixer.music.load("./assets/walk.mp3")
 	pygame.mixer.music.play(1)
 	time.sleep(20)
 	pygame.mixer.music.stop()
