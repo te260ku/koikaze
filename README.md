@@ -1,4 +1,6 @@
 # koikaze
+
+## 概要
 いつでもどこでも誰かとすれ違う感覚を味わえる装置。足音や匂いをインタラクティブに提示することによって、視覚に依存しないバーチャルなすれ違い体験が可能。
 
 ![koikaze_logo](https://user-images.githubusercontent.com/34476697/138211468-971588cb-0d49-4163-baea-7dc5bc1de45c.png)
